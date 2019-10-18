@@ -10,16 +10,19 @@ In this graph, each node corresponds to a sound.
 Edges between nodes reflect a notion of content-based similarity calculated on a feature space, for instance, using the [AudioSet](https://research.google.com/audioset/) embeddings.
 Clusters in the graph are identified using a Louvain community detection algorithm [implementation](https://github.com/taynaud/python-louvain/tree/networkx2) with the [NetworkX](https://networkx.github.io/) Python package.
 
-In the `results_experiment_feature_comparison/` directory, you can find the results of clustering the datasets with the two different clustering methods, and with the different features: AudioSet embeddings, OpenL3 embeddings (music and env), SoundNet embeddings and MFCC features.
 
+## Experiment
 
-## Results
--------------------
-TODO
+We evaluated the methods and features with several datasets. In the `datasets/` directory, you can find one JSON file per dataset, which provides the IDs of the Freesound sounds for each classes of the AudioSet Ontology. You can download the sounds using the Freesound API by yourself (you can contact me for some help on this).
+You can refer to the `json/ontology.json` file for relating the dataset category IDs to their corresponding name. Tables 1 provides an overview of the datasets organised in 6 families.
+In the `results_experiment_feature_comparison/` directory, you can find the results of clustering the datasets with the two different clustering methods, and with the different features: AudioSet embeddings, OpenL3 embeddings (music and env), SoundNet embeddings and MFCC features. Tables 2 shows the performance of the different method and features averaged on the different families of datasets. 
 
+ADD TABLE 1
+
+ADD TABLE 2
 
 ## Setup
--------------------
+
 - Install dependencies in a virtual environment:
   ```
   python3 -m venv venv
