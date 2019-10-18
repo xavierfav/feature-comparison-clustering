@@ -1,0 +1,5 @@
+numpy==1.16.4
+sklearn==0.21.2
+networkx==2.3
+python-louvain==0.13
+XlsxWriter==1.1.8
