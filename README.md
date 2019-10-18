@@ -10,16 +10,14 @@ In this graph, each node corresponds to a sound.
 Edges between nodes reflect a notion of content-based similarity calculated on a feature space, for instance, using the [AudioSet](https://research.google.com/audioset/) embeddings.
 Clusters in the graph are identified using a Louvain community detection algorithm [implementation](https://github.com/taynaud/python-louvain/tree/networkx2) with the [NetworkX](https://networkx.github.io/) Python package.
 
+
+## Results
+
 In the `results_experiment_feature_comparison/` directory, you can find the results of clustering the datasets with the two different clustering methods, and with the different features: AudioSet embeddings, OpenL3 embeddings (music and env), SoundNet embeddings and MFCC features.
 
 
-## Results
--------------------
-TODO
-
-
 ## Setup
--------------------
+
 - Install dependencies in a virtual environment:
   ```
   python3 -m venv venv
