@@ -14,12 +14,14 @@ Clusters in the graph are identified using a Louvain community detection algorit
 ## Experiment
 
 We evaluated the methods and features with several datasets. In the `datasets/` directory, you can find one JSON file per dataset, which provides the IDs of the Freesound sounds for each classes of the AudioSet Ontology. You can download the sounds using the Freesound API by yourself (you can contact me for some help on this).
-You can refer to the `json/ontology.json` file for relating the dataset category IDs to their corresponding name. Tables 1 provides an overview of the datasets organised in 6 families.
-In the `results_experiment_feature_comparison/` directory, you can find the results of clustering the datasets with the two different clustering methods, and with the different features: AudioSet embeddings, OpenL3 embeddings (music and env), SoundNet embeddings and MFCC features. Tables 2 shows the performance of the different method and features averaged on the different families of datasets. 
+You can refer to the `json/ontology.json` file for relating the dataset category IDs to their corresponding name. Table 1 below provides an overview of the datasets organised in 6 families.
 
-ADD TABLE 1
+![Alt text](img/table_dataset_icassp_2020.png)
 
-ADD TABLE 2
+In the `results_experiment_feature_comparison/` directory, you can find the results of clustering the datasets with the two different clustering methods, and with the different features: AudioSet embeddings, OpenL3 embeddings (music and env), SoundNet embeddings and MFCC features. Table 2 below shows the performance of the different method and features averaged on the different families of datasets. 
+
+![Alt text](img/table_results_icassp_2020.png)
+
 
 ## Setup
 
