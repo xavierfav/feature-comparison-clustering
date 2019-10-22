@@ -1,4 +1,4 @@
-# A comparison of audio features for the unsupervised classification of sounds
+# Comparing Audio Features for Unsupervised Sound Classification
 
 This repository hosts some code for evaluating different features for the unsupervised classification (clustering) of audio content from [Freesound](https://freesound.org/).
 The clustering performance is evaluated on different datasets using an external cluster validation, which consists in comparing the results of a clustering to an externally known result (provided ground truth labels). The data has been collected within the [Freesound Annotator](https://annotator.freesound.org/) platform, which hosts the [FSD](https://annotator.freesound.org/fsd/explore/) dataset containing sounds organised following the [AudioSet Ontology](https://research.google.com/audioset/ontology/index.html).
