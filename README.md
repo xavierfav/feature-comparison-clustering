@@ -11,14 +11,18 @@ Edges between nodes reflect a notion of content-based similarity calculated on a
 Clusters in the graph are identified using a Louvain community detection algorithm [implementation](https://github.com/taynaud/python-louvain/tree/networkx2) with the [NetworkX](https://networkx.github.io/) Python package.
 
 
-## Experiment
+## Datasets
 
-We evaluated the methods and features with several datasets. In the `datasets/` directory, you can find one JSON file per dataset, which provides the IDs of the Freesound sounds for each classes of the AudioSet Ontology. You can download the sounds using the Freesound API by yourself (you can contact me for some help on this).
+In the `datasets/` directory, you can find one JSON file per dataset, which provides the IDs of the Freesound sounds for each classes of the AudioSet Ontology. You can download the sounds using the Freesound API by yourself (you can contact me for some help on this). 
 You can refer to the `json/ontology.json` file for relating the dataset category IDs to their corresponding name. Table 1 below provides an overview of the datasets organised in 6 families.
 
 ![Alt text](img/table_dataset_icassp_2020.png)
 
-In the `results_experiment_feature_comparison/` directory, you can find the results of clustering the datasets with the two different clustering methods, and with the different features: AudioSet embeddings, OpenL3 embeddings (music and env), SoundNet embeddings and MFCC features. Table 2 below shows the performance of the different method and features averaged on the different families of datasets. 
+
+## Experiment
+
+We evaluated the methods and features with several datasets. 
+In the `results_experiment_feature_comparison/` directory, you can find the pre-computed clustering the datasets with the two different clustering methods, and with the different features: AudioSet embeddings, OpenL3 embeddings (music and env), SoundNet embeddings and MFCC features. Table 2 below shows the performance of the different method and features averaged on the different families of datasets. 
 
 ![Alt text](img/table_results_icassp_2020.png)
 
@@ -37,7 +41,7 @@ In the `results_experiment_feature_comparison/` directory, you can find the resu
   cp settings.example.py settings.py
   ```
 
-- As you might now understand, you need to have a folder containing the pre-calculated audio features for the sounds in the different datasets. There are in total around 30k sounds (with freesound IDs in `all_sound_ids.json`) and 45 datasets (JSON files in `datasets/`).
+- As you might now understand, you need to have a folder containing the pre-calculated audio features for the sounds in the different datasets. There are in total around 30k sounds (with freesound IDs in `all_sound_ids.json`) and 44 datasets (JSON files in `datasets/`).
 
 - You can start the clusterings by typing:
   ```
