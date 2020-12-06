@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Freesound Graph</title>
+    <meta name="description" content="">
+    <meta name="theme-color" content="#000000">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #header {
+            top: 0;
+            height: 60px;
+            background-color: grey;
+            overflow-y: scroll;
+        }
+        button {
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+        .as.button {
+            color: blue;
+        }
+        .af.button {
+            color: red;
+        }
+        .af2.button {
+            color: green;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="src/webAudioApiForDesigners.js"></script>
+    <script src="//unpkg.com/force-graph"></script>
+    <script src="//unpkg.com/d3-quadtree"></script>
+    <script src="//unpkg.com/d3-force"></script>
+    <!--<script src="../../dist/force-graph.js"></script>-->
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="graph"></div>
+
+    <script>
+        $( document ).ready(function() {
+
+            // create button dynamically
+            var header_div = $('#header'); 
+            $.getJSON("clustering_info.json", function(graph) {
+                }).then(data => {
+                    var datasets = data.datasets;
+                    var features = data.features;
+                    datasets.forEach(dataset => {
+                        features.forEach(feature => {
+                            header_div.append(`<button class='button' id='${dataset}-${feature}'>${dataset} (F ${feature})</button>`)
+                        });
+                    });
+                    $('.button').click(function() {
+                        chooseQuery($(this).attr('id'));
+                    })
+                });
+
+            const NODE_R = 30;
+
+            var elem = document.getElementById('graph');
+
+            // Audio
+            var context = initializeNewWebAudioContext();
+            var playingSound; // keep track of playing sound to stop it
+
+            function playSound(d) {
+                // load and play sound
+                context.loadSound(d.preview, '0');
+                playingSound = context.playSound('0');
+            }
+
+            function stopSound() {
+                // stop playing sound
+                if (playingSound) {
+                    playingSound.pause();
+                }
+            }
+
+            function onNodeHover(node) {
+                if (node) {
+                    elem.style.cursor = 'pointer';
+                    stopSound();
+                    playSound(node);
+                } else {
+                    elem.style.cursor = null;
+                    stopSound();
+                }
+            }
+            
+            var Graph = ForceGraph()(elem);
+            Graph.backgroundColor('#101020')
+                .nodeRelSize(NODE_R)
+                //.d3Force('center', null)
+                //.d3Force('charge', null)
+                //.d3Force('link', null)
+                .nodeLabel(node => `${node.name}: ${node.tags}`)
+                .nodeAutoColorBy('group')
+                .linkColor(() => 'rgba(255,255,255,0.2)')
+                .onNodeHover(node => onNodeHover(node))
+                .d3AlphaDecay(0.01)
+                .d3VelocityDecay(0.1)
+                .cooldownTime(15000)
+
+            function chooseQuery(name) {
+                console.log(name);
+                
+                $.getJSON("json/"+ name +".json", function(graph) {
+                }).then(data => {
+                    //var data = JSON.parse(data);
+                    var nodes = data.nodes;
+                    Graph
+                        .d3Force('collide', d3.forceCollide(Graph.nodeRelSize()*1.1))
+                        .d3Force('box', () => {
+                        const SQUARE_HALF_SIDE = Graph.nodeRelSize() * 800 * 0.5;
+                        nodes.forEach(node => {
+                            const x = node.x || 1, y = node.y || 1;
+                            // bounce on box walls
+                            if (Math.abs(x) > SQUARE_HALF_SIDE) { node.vx *= 0; }
+                            if (Math.abs(y) > SQUARE_HALF_SIDE) { node.vy *= 0; }
+                        });
+                        })
+                        .zoom(1)
+                        .graphData(data);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
